@@ -1,7 +1,21 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.views.generic import CreateView, ListView, DetailView
 
 from.models import Note
+from .forms import NoteForm
+
+class NoteCreateView(CreateView):
+    """
+    Class-based view for creating a new note.
+    """
+    model = Note
+    template_name = 'notes/notes_create.html'
+    success_url = '/smart/notes'  # Redirect to the list of notes after creation
+    form_class = NoteForm  # Use the NoteForm defined in forms.py
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user  # Set the author to the current user
+        return super().form_valid(form)
 
 class NoteListView(ListView):
     """

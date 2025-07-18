@@ -1,9 +1,20 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponseRedirect, Http404
+from django.urls import reverse
 from django.views.generic import CreateView, ListView, DetailView, UpdateView
 from django.views.generic.edit import DeleteView
 
 from.models import Note
 from .forms import NoteForm
+
+def add_like_view(request, pk):
+    if request.method != 'POST':
+        note = get_object_or_404(Note, pk=pk)
+        note.likes += 1
+        note.save()
+        return HttpResponseRedirect(reverse('notes.detail', args=(pk,)))
+    else:
+        raise Http404("Invalid request method. Only POST requests are allowed.")
 
 class NoteDeleteView(DeleteView):
     """

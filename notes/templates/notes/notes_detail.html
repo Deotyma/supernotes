@@ -5,10 +5,17 @@
         <p>{{ note.content }}</p>
         <p>Created at: {{ note.created_at }}</p> 
 
+        <p>Likes: {{ note.likes }}</p>
+        <form method="post" action="{% url 'notes.add_like' pk=note.id %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-success" action="{% url 'notes.add_like' pk=note.id %}">Like</button>
+        </form>
+
         <a href="{% url 'notes.edit' pk=note.id %}" class="btn btn-primary">Update</a>
 
         <a href="{% url 'notes.delete' pk=note.id %}" class="btn btn-danger">Cancel</a>
-        
+
         <a href="{% url 'notes.list' %}" class="btn btn-secondary">List of notes</a>
 
     </div>

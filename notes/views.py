@@ -1,15 +1,25 @@
 from django.shortcuts import render
 from django.views.generic import CreateView, ListView, DetailView, UpdateView
+from django.views.generic.edit import DeleteView
 
 from.models import Note
 from .forms import NoteForm
+
+class NoteDeleteView(DeleteView):
+    """
+    Class-based view for deleting a note.
+    """
+    model = Note
+    template_name = 'notes/notes_delete.html'
+    success_url = '/smart/notes'  # Redirect to the list of notes after deletion
+
 
 class NoteUpdateView(UpdateView):
     """
     Class-based view for updating an existing note.
     """
     model = Note
-    template_name = 'notes/notes_update.html'
+    template_name = 'notes/notes_create.html'
     success_url = '/smart/notes'  # Redirect to the list of notes after update
     form_class = NoteForm  # Use the NoteForm defined in forms.py
 

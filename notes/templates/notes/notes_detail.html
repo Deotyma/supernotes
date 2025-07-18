@@ -5,6 +5,12 @@
         <p>{{ note.content }}</p>
         <p>Created at: {{ note.created_at }}</p> 
 
+        <a href="{% url 'notes.edit' pk=note.id %}" class="btn btn-primary">Update</a>
+
+        <a href="{% url 'notes.delete' pk=note.id %}" class="btn btn-danger">Cancel</a>
+        
+        <a href="{% url 'notes.list' %}" class="btn btn-secondary">List of notes</a>
+
     </div>
     
 {%endblock %}

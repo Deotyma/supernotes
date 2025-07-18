@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-<form method="post" class="p-5" action="{% url 'notes.create' %}">  {% csrf_token %}
+<form method="post" class="p-5">  {% csrf_token %}
         {{form.as_p }}
         <button type="submit" class="btn btn-primary">Create Note</button>
+        <button type="submit" class="btn btn-primary">Update</button>
         <a href="{% url 'notes.list' %}" class="btn btn-secondary">List of notes</a>
 </form>
     {% if form.errors %}    

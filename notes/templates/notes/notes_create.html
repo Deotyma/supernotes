@@ -1,19 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-   <form action="{% url 'notes.create' %}" method="POST">
-         {% csrf_token %}
-         <div class="mb-3">
-              <label for="title" class="form-label">Title</label>
-              <input type="text" class="form-control" id="title" name="title" required>
-         </div>
-         <div class="mb-3">
-              <label for="content" class="form-label">Content</label>
-              <textarea class="form-control" id="content" name="content" rows="5" required></textarea>
-         </div>
-         <button type="submit" class="btn btn-primary">Create Note</button>
-    </form>
-    {% if form.errors %}
+<form method="post" class="p-5" action="{% url 'notes.create' %}">  {% csrf_token %}
+        {{form.as_p }}
+        <button type="submit" class="btn btn-primary">Create Note</button>
+        <a href="{% url 'notes.list' %}" class="btn btn-secondary">List of notes</a>
+</form>
+    {% if form.errors %}    
         <div class="alert alert-danger mt-3">
             <ul>
                 {% for field, errors in form.errors.items %}

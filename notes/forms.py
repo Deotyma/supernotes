@@ -8,6 +8,14 @@ class NoteForm(forms.ModelForm):
     class Meta:
         model = Note
         fields = ['title', 'content']
+        widgets = {
+            'title': forms.TextInput(attrs={'placeholder': 'Enter note title', 'class':'my=5, form-control'},),
+            'content': forms.Textarea(attrs={'placeholder': 'Enter note content', 'class':'my-5 form-control', 'rows': 5}),
+        }
+        labels = {
+            'title': 'Note Title',
+            'content': 'Note Content',
+        }
         
     def clean_title(self):
         title = self.cleaned_data.get('title')

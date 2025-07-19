@@ -5,8 +5,10 @@ from django.views.generic import CreateView, ListView, DetailView, UpdateView
 from django.views.generic.edit import DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+
 from.models import Note
 from .forms import NoteForm
+
 
 def add_like_view(request, pk):
     if request.method == 'POST':

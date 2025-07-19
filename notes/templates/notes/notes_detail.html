@@ -1,16 +1,28 @@
 {% extends "base.html" %}
 {% block content %}
     <div class="border round p-3 my-5">
-        <h1 class="my-5">{{ note.title }} </h1>
+        <h1 class="my-5">{{ note.title }} {%if note.is_public%}<span class="bage bg-secondary">Public</span> {%endif%}</h1>
         <p>{{ note.content }}</p>
         <p>Created at: {{ note.created_at }}</p> 
 
         <p>Likes: {{ note.likes }}</p>
         <form method="post" action="{% url 'notes.add_like' pk=note.id %}">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="btn btn-success" action="{% url 'notes.add_like' pk=note.id %}">Like</button>
-        </form>
+    {% csrf_token %}
+    <button type="submit" class="btn btn-success">
+        Like
+    </button>
+</form>
+
+<form method="post" action="{% url 'notes.change_visibility' pk=note.id %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-info">
+        {% if note.is_public %}
+            Make it Private
+        {% else %}
+            Make it Public
+        {% endif %}
+    </button>
+</form>
 
         <a href="{% url 'notes.edit' pk=note.id %}" class="btn btn-primary">Update</a>
 

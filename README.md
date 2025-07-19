@@ -7,3 +7,16 @@ source venv/Scripts/activate
 ```
 python manage.py runserver
 ```
+
+## Data Base
+```
+python manage.py makemigrations
+
+python manage.py migrate
+
+```
+
+## Python shell
+```
+python manage.py shell
+```

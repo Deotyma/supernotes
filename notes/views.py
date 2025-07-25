@@ -64,19 +64,7 @@ class NoteCreateView(CreateView):
         self.object.user = self.request.user  # Set the author to the current user
         self.object.save()  # Save the note instance to the database
         return HttpResponseRedirect(self.get_success_url())  # Redirect to the success URL
-    
-    
-class NoteUpdateView(UpdateView):
-
-    model = Note
-    template_name = 'notes/notes_create.html'
-    pk_url_kwarg = 'pk'  # The primary key of the note to update
-    success_url = '/smart/notes'  # Redirect to the list of notes after update
-    form_class = NoteForm  # Use the NoteForm defined in forms.py
-
-    def form_valid(self, form):
-        form.instance.author = self.request.user  # Set the author to the current user
-        return super().form_valid(form)    
+     
 
 class NoteListView(LoginRequiredMixin, ListView):
     """
